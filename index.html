@@ -9,7 +9,10 @@
 <body>
     <header>
         <h1>英语学习助手</h1>
-        <div class="word-count">总词汇量: <span id="totalWords">0</span></div>
+        <div class="header-actions">
+            <div class="word-count">总词汇量: <span id="totalWords">0</span></div>
+            <button id="uploadBtn" class="upload-button">📁 上传</button>
+        </div>
     </header>
 
     <nav class="main-nav">
@@ -23,15 +26,46 @@
         </ul>
     </nav>
 
+    <!-- 上传弹窗 -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>上传内容</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="upload-tabs">
+                    <button class="tab-btn active" data-tab="text">文本输入</button>
+                    <button class="tab-btn" data-tab="file">文件上传</button>
+                </div>
+                
+                <!-- 文本输入面板 -->
+                <div class="tab-content active" id="textTab">
+                    <textarea id="textInput" placeholder="在此输入你的学习内容..."></textarea>
+                    <div class="text-options">
+                        <label>
+                            <input type="checkbox" id="autoExtractWords"> 自动提取英文单词
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- 文件上传面板 -->
+                <div class="tab-content" id="fileTab">
+                    <input type="file" id="fileInput" multiple>
+                    <p class="file-info">支持格式：音频、图片、PDF、Word、TXT等</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelUpload">取消</button>
+                <button id="confirmUpload">确认上传</button>
+            </div>
+        </div>
+    </div>
+
     <main class="content-container">
         <!-- 听力模块 -->
         <section id="listening" class="module active">
             <h2>听力练习</h2>
-            <div class="upload-section">
-                <h3>上传音频内容</h3>
-                <input type="file" id="audioUpload" accept="audio/*" multiple>
-                <button id="uploadAudioBtn">上传音频</button>
-            </div>
             <div class="content-display" id="listeningContent">
                 <p>暂无听力内容</p>
             </div>
@@ -40,13 +74,6 @@
         <!-- 口语模块 -->
         <section id="speaking" class="module">
             <h2>口语练习</h2>
-            <div class="upload-section">
-                <h3>上传口语内容</h3>
-                <input type="file" id="speakingAudioUpload" accept="audio/*" multiple>
-                <button id="uploadSpeakingAudioBtn">上传音频</button>
-                <button id="recordBtn">开始录音</button>
-                <button id="stopRecordBtn" disabled>停止录音</button>
-            </div>
             <div class="content-display" id="speakingContent">
                 <p>暂无口语内容</p>
             </div>
@@ -55,12 +82,6 @@
         <!-- 阅读模块 -->
         <section id="reading" class="module">
             <h2>阅读练习</h2>
-            <div class="upload-section">
-                <h3>上传阅读内容</h3>
-                <input type="file" id="readingUpload" accept=".txt,.pdf,.doc,.docx,image/*" multiple>
-                <textarea id="readingText" placeholder="或直接输入文本内容..."></textarea>
-                <button id="uploadReadingBtn">上传内容</button>
-            </div>
             <div class="content-display" id="readingContent">
                 <p>暂无阅读内容</p>
             </div>
@@ -69,11 +90,6 @@
         <!-- 写作模块 -->
         <section id="writing" class="module">
             <h2>写作练习</h2>
-            <div class="upload-section">
-                <h3>上传写作内容</h3>
-                <textarea id="writingText" placeholder="输入你的写作内容..."></textarea>
-                <button id="saveWritingBtn">保存写作</button>
-            </div>
             <div class="content-display" id="writingContent">
                 <p>暂无写作内容</p>
             </div>
@@ -82,12 +98,6 @@
         <!-- 单词模块 -->
         <section id="vocabulary" class="module">
             <h2>单词学习</h2>
-            <div class="upload-section">
-                <h3>上传单词内容</h3>
-                <input type="file" id="vocabUpload" accept=".txt,.csv" multiple>
-                <textarea id="vocabText" placeholder="输入单词列表（每行一个单词）..."></textarea>
-                <button id="uploadVocabBtn">上传单词</button>
-            </div>
             <div class="content-display" id="vocabularyContent">
                 <p>暂无单词内容</p>
             </div>
@@ -96,7 +106,10 @@
         <!-- 语法模块 -->
         <section id="grammar" class="module">
             <h2>语法学习</h2>
-            <div class="upload-section">
-                <h3>上传语法内容</h3>
-                <input type="file" id="grammarUpload" accept=".txt,.pdf,.doc,.docx" multiple>
-                <textarea id="grammarText" placeholder="输入语法规则说明..."></textarea>
+            <div class="content-display" id="grammarContent">
+                <p>暂无语法内容</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/wordCounter.js"></script>
