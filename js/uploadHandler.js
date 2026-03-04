@@ -1,36 +1,41 @@
+**js/uploadHandler.js**（修改版）
+```javascript
 // 上传处理模块
 document.addEventListener('DOMContentLoaded', function() {
     setupUploadListeners();
-    setupRecordingFunctionality();
 });
-
 function setupUploadListeners() {
-    // 音频上传
-    document.getElementById('uploadAudioBtn')?.addEventListener('click', function() {
-        handleFileUpload('audioUpload', 'listening');
-    });
-    
-    // 口语音频上传
-    document.getElementById('uploadSpeakingAudioBtn')?.addEventListener('click', function() {
-        handleFileUpload('speakingAudioUpload', 'speaking');
-    });
-    
-    // 阅读内容上传
-    document.getElementById('uploadReadingBtn')?.addEventListener('click', function() {
-        const textContent = document.getElementById('readingText').value;
-        if (textContent.trim()) {
-            displayContent('reading', textContent);
-            updateModuleWords('reading', textContent);
-        }
-        handleFileUpload('readingUpload', 'reading');
-    });
-    
-    // 写作内容保存
-    document.getElementById('saveWritingBtn')?.addEventListener('click', function() {
-        const writingContent = document.getElementById('writingText').value;
-        if (writingContent.trim()) {
-            displayContent('writing', writingContent);
-            updateModuleWords('writing', writingContent);
-            document.getElementById('writingText').value = '';
+    // 确认上传按钮
+    document.getElementById('confirmUpload')?.addEventListener('click', function() {
+        const activeTab = document.querySelector('.tab-btn.active').getAttribute('data-tab');
+        
+        if (activeTab === 'text') {
+            handleTextUpload();
+        } else if (activeTab === 'file') {
+            handleFileUpload();
         }
     });
+}
+function handleTextUpload() {
+    const textInput = document.getElementById('textInput').value;
+    const autoExtract = document.getElementById('autoExtractWords').checked;
+    const currentModule = getCurrentActiveModule();
+    
+    if (!textInput.trim()) {
+        alert('请输入内容后再上传');
+        return;
+    }
+    
+    // 显示内容
+    displayContent(currentModule, textInput);
+    
+    // 如果需要自动提取单词
+    if (autoExtract) {
+        updateModuleWords(currentModule, textInput);
+    }
+    
+    // 清空输入框并关闭弹窗
+    document.getElementById('textInput').value = '';
+    document.getElementById('uploadModal').style.display = 'none';
+}
+function handleFileUpload() {
