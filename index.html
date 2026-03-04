@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语学习助手 - 听说读写单词语法</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>英语学习助手</h1>
+        <div class="word-count">总词汇量: <span id="totalWords">0</span></div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#listening" class="active" data-module="listening">听力</a></li>
+            <li><a href="#speaking" data-module="speaking">口语</a></li>
+            <li><a href="#reading" data-module="reading">阅读</a></li>
+            <li><a href="#writing" data-module="writing">写作</a></li>
+            <li><a href="#vocabulary" data-module="vocabulary">单词</a></li>
+            <li><a href="#grammar" data-module="grammar">语法</a></li>
+        </ul>
+    </nav>
+
+    <main class="content-container">
+        <!-- 听力模块 -->
+        <section id="listening" class="module active">
+            <h2>听力练习</h2>
+            <div class="upload-section">
+                <h3>上传音频内容</h3>
+                <input type="file" id="audioUpload" accept="audio/*" multiple>
+                <button id="uploadAudioBtn">上传音频</button>
+            </div>
+            <div class="content-display" id="listeningContent">
+                <p>暂无听力内容</p>
+            </div>
+        </section>
+
+        <!-- 口语模块 -->
+        <section id="speaking" class="module">
+            <h2>口语练习</h2>
+            <div class="upload-section">
+                <h3>上传口语内容</h3>
+                <input type="file" id="speakingAudioUpload" accept="audio/*" multiple>
+                <button id="uploadSpeakingAudioBtn">上传音频</button>
+                <button id="recordBtn">开始录音</button>
+                <button id="stopRecordBtn" disabled>停止录音</button>
+            </div>
+            <div class="content-display" id="speakingContent">
+                <p>暂无口语内容</p>
+            </div>
+        </section>
+
+        <!-- 阅读模块 -->
+        <section id="reading" class="module">
+            <h2>阅读练习</h2>
+            <div class="upload-section">
+                <h3>上传阅读内容</h3>
+                <input type="file" id="readingUpload" accept=".txt,.pdf,.doc,.docx,image/*" multiple>
+                <textarea id="readingText" placeholder="或直接输入文本内容..."></textarea>
+                <button id="uploadReadingBtn">上传内容</button>
+            </div>
+            <div class="content-display" id="readingContent">
+                <p>暂无阅读内容</p>
+            </div>
+        </section>
+
+        <!-- 写作模块 -->
+        <section id="writing" class="module">
+            <h2>写作练习</h2>
+            <div class="upload-section">
+                <h3>上传写作内容</h3>
+                <textarea id="writingText" placeholder="输入你的写作内容..."></textarea>
+                <button id="saveWritingBtn">保存写作</button>
+            </div>
+            <div class="content-display" id="writingContent">
+                <p>暂无写作内容</p>
+            </div>
+        </section>
+
+        <!-- 单词模块 -->
+        <section id="vocabulary" class="module">
+            <h2>单词学习</h2>
+            <div class="upload-section">
+                <h3>上传单词内容</h3>
+                <input type="file" id="vocabUpload" accept=".txt,.csv" multiple>
+                <textarea id="vocabText" placeholder="输入单词列表（每行一个单词）..."></textarea>
+                <button id="uploadVocabBtn">上传单词</button>
+            </div>
+            <div class="content-display" id="vocabularyContent">
+                <p>暂无单词内容</p>
+            </div>
+        </section>
+
+        <!-- 语法模块 -->
+        <section id="grammar" class="module">
+            <h2>语法学习</h2>
+            <div class="upload-section">
+                <h3>上传语法内容</h3>
+                <input type="file" id="grammarUpload" accept=".txt,.pdf,.doc,.docx" multiple>
+                <textarea id="grammarText" placeholder="输入语法规则说明..."></textarea>
