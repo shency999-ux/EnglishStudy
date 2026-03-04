@@ -1,4 +1,4 @@
-## 2. css/style.css（完整）
+### 2. **css/style.css**（修改版）
 ```css
 * {
     margin: 0;
@@ -24,9 +24,30 @@ header h1 {
     font-size: 2rem;
     font-weight: 600;
 }
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 .word-count {
     font-size: 1.1rem;
     font-weight: 500;
+}
+.upload-button {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.upload-button:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-2px);
 }
 .main-nav {
     background: white;
@@ -79,51 +100,6 @@ header h1 {
     font-size: 1.8rem;
     font-weight: 600;
 }
-.upload-section {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-}
-.upload-section h3 {
-    margin-bottom: 1rem;
-    color: #555;
-    font-size: 1.3rem;
-}
-input[type="file"],
-textarea {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: transform 0.2s ease;
-    margin-right: 0.5rem;
-}
-button:hover {
-    transform: translateY(-2px);
-}
-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-}
 .content-display {
     background: white;
     padding: 1.5rem;
@@ -135,44 +111,91 @@ button:disabled {
     color: #777;
     font-style: italic;
 }
-/* 响应式设计 */
-@media (max-width: 768px) {
-    header {
-        padding: 1rem;
-    }
-    
-    header h1 {
-        font-size: 1.5rem;
-    }
-    
-    .word-count {
-        font-size: 1rem;
-    }
-    
-    .main-nav a {
-        padding: 1rem;
-        font-size: 0.9rem;
-    }
-    
-    .content-container {
-        padding: 1rem;
-    }
-    
-    .module h2 {
-        font-size: 1.5rem;
-    }
+/* 上传弹窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
 }
-/* 滚动条样式 */
-.main-nav ul::-webkit-scrollbar {
-    height: 4px;
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
-.main-nav ul::-webkit-scrollbar-track {
-    background: #f1f1f1;
+.modal-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.main-nav ul::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 2px;
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
 }
-.main-nav ul::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+.close {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
 }
+.close:hover {
+    opacity: 0.8;
+}
+.modal-body {
+    padding: 1.5rem;
+}
+.upload-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+.tab-btn {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+}
+.tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+#textInput {
+    width: 100%;
+    min-height: 150px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    margin-bottom: 1rem;
+}
+.text-options {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.text-options label {
+    display: flex;
